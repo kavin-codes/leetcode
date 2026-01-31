@@ -1,198 +1,76 @@
-Absolutely! Let’s break your **Group Anagrams** code **thoroughly**, including **pattern, method, alternatives, complexity, and why we use it**. I’ll explain like a full conceptual guide.
 
----
+strs = ["eat","tea","tan","ate","nat","bat"]   # Input list of strings
 
-## **1️⃣ The Problem**
+class Solution:
+    def single(self, strs):
 
-We are given a list of strings and we want to **group all the anagrams together**.
+        res = {}   # Dictionary to group anagrams
+                   # key   -> character frequency pattern
+                   # value -> list of words with same pattern
 
-**Example:**
+        for word in strs:   # Loop through each word in the input list
+            freq = {}       # Dictionary to store frequency of characters in word
 
-```python
-Input: ["eat","tea","tan","ate","nat","bat"]
-Output: [["eat","tea","ate"], ["tan","nat"], ["bat"]]
-```
+            for ch in word: # Loop through each character in the word
+                if ch in freq:
+                    freq[ch] += 1   # Increase count if character already exists
+                else:
+                    freq[ch] = 1    # Initialize count for new character
 
----
+            # Convert freq dictionary into a sortable & hashable key
+            # Example: {'e':1,'a':1,'t':1} → (('a',1),('e',1),('t',1))
+            key = tuple(sorted(freq.items()))
 
-## **2️⃣ The Code**
+            # If this frequency pattern is not yet in result dictionary
+            if key not in res:
+                res[key] = []   # Create an empty list for this pattern
 
-```python
-from collections import defaultdict
+            # Add the current word to its anagram group
+            res[key].append(word)
 
-def groupAnagrams(strs):
-    anagram_map = defaultdict(list)
-    
-    for s in strs:
-        # Sort each string to use as a key
-        key = ''.join(sorted(s))
-        anagram_map[key].append(s)
-        
-    # Return just the grouped lists
-    return list(anagram_map.values())
-```
+        # Return only the grouped anagrams (dictionary values)
+        return list(res.values())
 
----
 
-## **3️⃣ Type of Problem / Pattern**
+s1 = Solution()                 # Create object of Solution class
+print(s1.single(strs))          # Call function and print grouped anagrams
 
-### **Pattern Used:**
 
-* **HashMap / Dictionary Grouping Pattern**
-* More specifically, it’s **“grouping by canonical representation”**.
-* This is very common in **grouping/sorting/string problems**.
 
-**Why this pattern?**
+------------------------------------------------------------------------------------------------------------------
 
-* Anagrams are words with **same letters but in different order**.
-* We need a **unique signature/key** to group them.
-* HashMap lets us **group items efficiently using a key**.
 
----
+Patterns / Techniques Used in This Code
 
-### **Step-by-Step Explanation of the Code**
+HashMap (Dictionary) Pattern
 
-#### **Step 1: Use a Dictionary (HashMap)**
+Uses dictionaries (res, freq) to store data in key–value format.
 
-```python
-anagram_map = defaultdict(list)
-```
+Helps in fast lookup and grouping.
 
-* `defaultdict(list)` automatically initializes an empty list for new keys.
-* Key → a **unique representation** of an anagram group.
-* Value → list of strings belonging to that group.
+Very common in LeetCode problems.
 
----
+Frequency Counting Pattern
 
-#### **Step 2: Generate the Key**
+Counts how many times each character appears in a word.
 
-```python
-key = ''.join(sorted(s))
-```
+Example: "eat" → {'e': 1, 'a': 1, 't': 1}
 
-* `sorted(s)` sorts the characters in the string.
-* `''.join()` converts it back to a string.
-* Example: `"eat"` → `"aet"`, `"tea"` → `"aet"`
-* **All anagrams will have the same sorted key**, so they go in the same group.
+Canonical Key / Normalization Pattern
 
----
+Converts character frequency into a fixed, comparable form using
+tuple(sorted(freq.items())).
 
-#### **Step 3: Add to the Map**
+Ensures all anagrams generate the same key even if order differs.
 
-```python
-anagram_map[key].append(s)
-```
+Grouping Pattern
 
-* Append the string to the list corresponding to its key.
-* Now all anagrams are **grouped under the same key**.
+Words with the same key are grouped together in a list.
 
----
+Implemented using res[key].append(word).
 
-#### **Step 4: Return the Result**
+Dictionary + List Combination
 
-```python
-return list(anagram_map.values())
-```
+Dictionary stores groups.
 
-* `anagram_map.values()` gives all the grouped lists.
-* `list()` converts it into a normal Python list.
-
----
-
-## **4️⃣ Time and Space Complexity**
-
-### **Time Complexity:**
-
-* Let:
-
-  * (N) = number of strings
-  * (K) = max length of a string
-
-**Step 1:** Sort each string → (O(K \log K))
-**Step 2:** Do this for N strings → (O(N * K \log K))
-
-**Total:**
-
-[
-O(N \cdot K \log K)
-]
-
----
-
-### **Space Complexity:**
-
-* Dictionary stores all strings in groups → (O(N \cdot K))
-* Sorting temporarily uses (O(K)) → negligible
-* **Total space:** (O(N \cdot K))
-
----
-
-## **5️⃣ Alternative Methods / Keys**
-
-1. **Sorted string (current method)**
-
-   * Simple, intuitive.
-   * Works well when strings are not extremely long.
-
-2. **Count of characters (frequency array)**
-
-   ```python
-   key = [0]*26
-   for c in s:
-       key[ord(c)-ord('a')] += 1
-   key = tuple(key)
-   ```
-
-   * Key becomes a **tuple of counts**.
-   * Advantage: avoids sorting → **O(K)** per string instead of (O(K \log K)).
-   * Especially better for very long strings.
-
-3. **Prime number multiplication (less common)**
-
-   * Assign a prime to each letter and multiply → product is unique for anagrams.
-   * Rarely used in practice, more of a clever trick.
-
----
-
-## **6️⃣ Why this Pattern Works**
-
-* **Canonical representation:** We convert each string to a **unique key** that is identical for all anagrams.
-* **HashMap:** Groups items efficiently without nested loops.
-* **Generality:** Same pattern works for many “grouping” problems:
-
-  * Group by length
-  * Group by modulo
-  * Group by digit sum
-  * Group by character set
-
----
-
-## **7️⃣ Python Features / Built-ins Used**
-
-* `collections.defaultdict` → simplifies dictionary initialization.
-* `sorted()` → sorts iterable efficiently.
-* `str.join()` → converts list of characters back to string.
-* `dict.values()` → gets all grouped lists.
-
-**No advanced or custom data structures needed.** Simple Python built-ins make this code concise and readable.
-
----
-
-### **8️⃣ Summary Table**
-
-| Aspect           | Details                                                              |
-| ---------------- | -------------------------------------------------------------------- |
-| Pattern          | HashMap / Grouping by canonical key                                  |
-| Key used         | Sorted string                                                        |
-| Method           | Iterate strings → compute key → add to dictionary → return values    |
-| Time Complexity  | (O(N * K \log K))                                                    |
-| Space Complexity | (O(N * K))                                                           |
-| Alternatives     | Frequency count (O(K)), Prime product                                |
-| Python features  | `defaultdict`, `sorted`, `join`, `dict.values()`                     |
-| Why this works   | All anagrams map to the same key, dictionary groups them efficiently |
-
----
-
-If you want, I can also **draw a small Venn diagram showing how different strings fall into the same anagram group** visually—it makes this pattern **super easy to remember**.
-
-Do you want me to make that visual?
+Lists store multiple words belonging to the same group.

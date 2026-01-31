@@ -1,12 +1,28 @@
-from collections import defaultdict
+strs = ["eat","tea","tan","ate","nat","bat"]
 
-def groupAnagrams(strs):
-    anagram_map = defaultdict(list)
-    
-    for s in strs:
-        # Sort each string to use as a key
-        key = ''.join(sorted(s))
-        anagram_map[key].append(s)
-        
-    # Return just the grouped lists
-    return list(anagram_map.values())
+class Solution:
+    def single(self, strs):
+
+        res = {}
+
+        for word in strs:
+            freq = {}
+
+            for ch in word:
+                if ch in freq:
+                    freq[ch] += 1
+                else:
+                    freq[ch] = 1
+
+            key = tuple(sorted(freq.items()))
+
+            if key not in res:
+                res[key] = []
+
+            res[key].append(word)   
+
+        return list(res.values())
+
+
+s1 = Solution()
+print(s1.single(strs))  
