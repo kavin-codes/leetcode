@@ -36,9 +36,9 @@ s1 = Solution()                 # Create object of Solution class
 print(s1.single(strs))          # Call function and print grouped anagrams
 
 
+output:
 
-
-
+[['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 ------------------------------------------------------------------------------------------------------------------
 
 
