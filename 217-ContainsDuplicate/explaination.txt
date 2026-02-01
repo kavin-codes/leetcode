@@ -1,0 +1,41 @@
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+
+        d = {}                     # HashMap to store frequency of each number
+
+        for i in nums:             # Loop through each number in the list
+            d[i] = d.get(i, 0) + 1 # Increase count (default 0 if key not present)
+
+            if d[i] == 2:          # If any number appears more than once
+                return True        # Duplicate found → return True immediately
+
+        return False               # No duplicates found after checking all elements
+
+
+------------------------------------------------------------------------
+
+
+alternate code:
+
+return len(nums) != len(set(nums)) # one line code 
+
+
+
+A set:
+
+Stores only unique values
+
+Automatically removes duplicates
+
+
+
+  -------------------------------------------------------------------------------------
+
+
+  Pattern used:
+
+HashMap (Dictionary)
+
+Frequency Count
+
+Early Exit
