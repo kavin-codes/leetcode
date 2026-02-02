@@ -1,0 +1,30 @@
+ 
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+
+        # PATTERN: Hash Map (Dictionary) + Single Pass
+        # We store the last index where each number appeared
+
+        d = {}  # number -> last index
+
+        for i, num in enumerate(nums):
+            # If the number was seen before
+            if num in d:
+                # Check the distance between indices
+                if i - d[num] <= k:
+                    return True
+
+            # Update the last seen index of the number
+            d[num] = i
+
+        # No nearby duplicate found
+        return False
+
+
+
+        -----------------------------------------------------------------------------------------------------------------------------
+
+
+
+Pattern Name:
+👉 Hash Map + One Pass (Index Tracking Pattern)
