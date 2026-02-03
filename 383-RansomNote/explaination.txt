@@ -1,0 +1,43 @@
+ransomNote = "a"     # String that needs to be formed
+magazine = "b"       # String that provides characters
+
+class Solution:
+   def single(self, ransomNote, magazine):
+      d1 = {}        # Dictionary to count characters in ransomNote
+      d2 = {}        # Dictionary to count characters in magazine
+      
+      # Count frequency of each character in ransomNote
+      for i in ransomNote:
+         if i in d1:
+            d1[i] += 1
+         else:
+            d1[i] = 1
+         
+      # Count frequency of each character in magazine
+      for j in magazine:
+         if j in d2:
+            d2[j] += 1
+         else:
+            d2[j] = 1
+            
+      # Check if magazine has enough characters
+      for ch in d1:
+         # If character not in magazine
+         # OR magazine count is less than needed
+         if ch not in d2 or d2[ch] < d1[ch]:
+            return False
+         
+      return True    # All characters are available in required count
+
+s1 = Solution()
+print(s1.single(ransomNote, magazine))
+--------------------------------------------------------------------------------------
+
+🔍 Pattern Used Here
+✅ Hash Map (Frequency Count) Pattern
+
+More specifically:
+
+Two Hash Maps
+
+Count & Compare Pattern
