@@ -1,0 +1,44 @@
+ransomNote = "a"
+magazine = "b"
+
+class Solution:
+    def single(self, ransomNote, magazine):
+        
+        # Dictionary to store character frequencies of ransomNote
+        d1 = {}
+        
+        # Dictionary to store character frequencies of magazine
+        d2 = {}
+        
+        # Count each character in ransomNote
+        for i in ransomNote:
+            if i in d1:
+                d1[i] += 1          # Increase count if character already exists
+            else:
+                d1[i] = 1           # Add character with count 1
+        
+        # Count each character in magazine
+        for j in magazine:
+            if j in d2:
+                d2[j] += 1          # Increase count if character already exists
+            else:
+                d2[j] = 1           # Add character with count 1
+        
+        # Check if magazine can satisfy ransomNote requirements
+        for ch in d1:
+            # If character is missing in magazine
+            # OR magazine has fewer occurrences than needed
+            if ch not in d2 or d2[ch] < d1[ch]:
+                return False        # Cannot construct ransomNote
+        
+        # If all characters are available in sufficient quantity
+        return True
+
+
+s1 = Solution()
+print(s1.single(ransomNote, magazine))
+---------------------------------------------------------------------------------------------------
+
+Pattern Used:
+
+🔹 Frequency Counting Pattern
