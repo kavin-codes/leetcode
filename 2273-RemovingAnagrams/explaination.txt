@@ -1,0 +1,38 @@
+words = ["abba","baba","bbaa","cd","cd"]
+
+class solution:
+    def single(self, words):
+        
+        res = []          # list to store the final result
+        prev = None       # stores frequency dictionary of previous word
+        
+        for word in words:        # loop through each word in the list
+            freq = {}             # dictionary to count character frequency
+            
+            for ch in word:       # loop through each character in the word
+                if ch in freq:
+                    freq[ch] += 1 # increment count if character already exists
+                else:
+                    freq[ch] = 1  # initialize count if character not seen before
+            
+            # compare current frequency pattern with previous one
+            if freq != prev:
+                res.append(word)  # add word if pattern is different
+                prev = freq       # update previous pattern
+        
+        return res                # return filtered list
+           
+s1 = solution()
+print(s1.single(words))
+ 
+
+
+ ---------------------------------------------------------------
+
+  pattern used here:
+  
+✅ Character Frequency Pattern
+
+method :
+
+hashmap
