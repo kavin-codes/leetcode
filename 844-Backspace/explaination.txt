@@ -1,0 +1,41 @@
+s = "a#c"
+t = "b"
+
+class solution:
+    def backspace(self, s, t):
+        st = []    # stack for processing string s
+        stc = []   # stack for processing string t
+        
+        # Process string s
+        for c in s:
+            if c == "#":           # backspace character found
+                if st != []:       # pop only if stack is not empty
+                    st.pop()
+            else:
+                st.append(c)       # push normal characters
+        
+        SUM1 = "".join(st)         # final string after backspaces in s
+        
+        # Process string t
+        for a in t:
+            if a == "#":           # backspace character found
+                if stc != []:      # pop only if stack is not empty
+                    stc.pop()
+            else:
+                stc.append(a)      # push normal characters
+        
+        SUM2 = "".join(stc)        # final string after backspaces in t
+        
+        # Compare both processed strings
+        if SUM1 == SUM2:
+            return True
+        else:
+            return False
+
+s1 = solution()
+print(s1.backspace(s, t))
+
+------------------------------------------------------------------------------------
+pattern used :
+
+Stack Simulation Pattern
