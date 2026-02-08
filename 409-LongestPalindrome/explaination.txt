@@ -1,0 +1,97 @@
+
+s = "abccccdd"
+
+class Solution:
+    def single(self, s):
+
+        # Dictionary to store frequency of each character
+        freq = {}
+
+        # Loop through every character in the string
+        for ch in s:
+            # If character already exists in dictionary
+            if ch in freq:
+                # Increase its count
+                freq[ch] += 1
+            else:
+                # First occurrence of character
+                freq[ch] = 1
+
+        # Variable to store longest palindrome length
+        length = 0
+
+        # Flag to check if any odd frequency exists
+        odd_found = False
+
+        # Loop through all character counts
+        for count in freq.values():
+            # If count is even, use it completely
+            if count % 2 == 0:
+                length += count
+            else:
+                # If count is odd, use (count - 1)
+                # so that it becomes even
+                length += count - 1
+
+                # Mark that an odd count exists
+                odd_found = True
+
+        # If at least one odd count exists,
+        # we can place one character in the center
+        if odd_found:
+            length += 1
+
+        # Return the maximum palindrome length
+        return length
+
+              or 
+
+
+     # Set to store characters that are waiting to form a pair
+seen = set()
+
+# Stores total length contributed by character pairs
+length = 0
+
+# Loop through each character in the string
+for ch in s:
+
+    # If character is already in set,
+    # it means we found a matching pair
+    if ch in seen:
+        # Remove the previously stored character
+        seen.remove(ch)
+
+        # A pair adds 2 characters to palindrome
+        length += 2
+
+    else:
+        # Character appeared first time,
+        # keep it in set waiting for its pair
+        seen.add(ch)
+
+# After processing all characters,
+# if any unpaired character exists,
+# one can be placed in the center
+if seen:
+    length += 1
+
+# Return the maximum palindrome length
+return length
+
+------------------------------------------------------------------------------------------------------------
+
+
+Dictionary method:
+
+Command: Count → Pair → Center
+
+Logic: Mathematical, frequency-based
+
+Set method:
+
+Command: Match → Remove → Count
+
+Logic: Greedy pairing
+
+Both give same correct answer.
