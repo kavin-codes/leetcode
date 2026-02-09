@@ -1,0 +1,69 @@
+
+# LeetCode 350: Intersection of Two Arrays II
+# Given two arrays nums1 and nums2, return an array of their intersection.
+# Each element in the result should appear as many times as it shows in both arrays.
+# The result can be in any order.
+
+
+
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        
+        # Step 1: Initialize frequency dictionaries for both arrays
+        freq1 = {}  # Hashmap to store frequency of each number in nums1
+        freq2 = {}  # Hashmap to store frequency of each number in nums2
+        
+        # Step 2: Count frequency of each number in nums1
+        for num in nums1:
+            if num in freq1:      # If number already exists, increment its count
+                freq1[num] += 1
+            else:
+                freq1[num] = 1     # If number does not exist, initialize count to 1
+        # Pattern used: Hashmap / Frequency Counting
+        
+        # Step 3: Count frequency of each number in nums2
+        for num in nums2:
+            if num in freq2:      # If number already exists, increment its count
+                freq2[num] += 1
+            else:
+                freq2[num] = 1     # If number does not exist, initialize count to 1
+        # Pattern used: Hashmap / Frequency Counting
+        
+        # Step 4: Initialize result list to store intersection
+        res = []  # Will store the final intersection including duplicates
+        # Pattern used: List Initialization
+        
+        # Step 5: Build the intersection list
+        for answer in freq1:            # Loop through each unique number in nums1
+            if answer in freq2:         # Check if number also exists in nums2
+                # Step 5a: Determine how many times it should appear
+                count = min(freq1[answer], freq2[answer])
+                # Pattern used: Minimum Frequency Pattern (handles duplicates)
+                
+                # Step 5b: Add the number 'count' times to the result
+                res.extend([answer] * count)
+                # Pattern used: List Extend Pattern (adds multiple occurrences efficiently)
+        
+        # Step 6: Return the final intersection list
+        return res  # List of numbers appearing in both arrays, including duplicates
+
+
+
+Patterns Used
+
+Hashmap / Frequency Counting Pattern
+
+
+
+Intersection Pattern
+
+
+Minimum Frequency Pattern (New Logic)
+
+For Problem 350, duplicates matter.
+
+count = min(freq1[answer], freq2[answer]) ensures we only include numbers as many times as they appear in both arrays.
+
+List Extend Pattern
+
+res.extend([answer] * count) adds multiple copies to the result list efficiently.
