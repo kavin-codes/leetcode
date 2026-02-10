@@ -1,0 +1,54 @@
+jewels = "z"      # String representing jewel types (only 'z' is a jewel)
+stones = "ZZ"     # String representing the stones you have ('Z' and 'Z')
+
+class Solution:
+    def single(self, jewels, stones):
+        freq = {}  # Create an empty dictionary to store jewel characters
+
+        # Loop through each character in the jewels string
+        for i in jewels:
+            if i in freq:      # Check if the jewel is already in the dictionary
+                freq[i] += 1   # If yes, increment its count (not really needed here since J has unique chars)
+            else:
+                freq[i] = 1    # If not, add it to the dictionary with count 1
+
+        count = 0  # Initialize a counter for jewels found in stones
+        # Loop through each stone
+        for ch in stones:
+            if ch in freq:   # If this stone is a jewel (exists in freq dictionary)
+                count += 1   # Increment the count
+
+        return count  # Return total number of jewels found in stones
+
+# Create an object of Solution class
+s1 = Solution()
+# Call the single method and print the result
+print(s1.single(jewels, stones))  # Output: 0 because 'z' != 'Z'
+
+
+===================================================================================
+
+jewels = "z"   # Jewel types
+stones = "ZZ"  # Stones you have
+
+class Solution:
+    def single(self, jewels, stones):
+        # Convert jewels string to a set for O(1) lookup
+        jewel_set = set(jewels)  #(z)
+
+        # Count how many stones are jewels
+        count = 0
+        for stone in stones:
+            if stone in jewel_set:#(z)
+                count += 1
+
+        return count
+
+# Create Solution object
+s1 = Solution()
+print(s1.single(jewels, stones))  # Output: 0 because 'z' != 'Z'
+ =========================================================================
+
+ pattern used here:
+
+ hashmap 
