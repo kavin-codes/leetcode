@@ -1,0 +1,52 @@
+nums = [100, 4, 200, 1, 3, 2]
+
+class Solution():
+    def single(self, nums):
+
+        # Convert list to set for O(1) lookup
+        # This helps us quickly check if a number exists
+        num_set = set(nums)
+
+        # This will store the length of the longest
+        # consecutive sequence found so far
+        longest = 0
+
+        # Loop through each unique number in the set
+        for num in num_set:
+
+            # Check if this number is the START of a sequence
+            # If num - 1 is not present, then no smaller consecutive number exists
+            if num - 1 not in num_set:
+
+                # Start building the sequence from this number
+                current = num
+
+                # Length is 1 because the sequence includes 'num' itself
+                length = 1
+
+                # Keep checking if the next consecutive number exists
+                while current + 1 in num_set:
+
+                    # Move to the next number in the sequence
+                    current += 1
+
+                    # Increase the sequence length
+                    length += 1
+
+                # Update the longest sequence length found so far
+                longest = max(longest, length)
+
+        # Return the length of the longest consecutive sequence
+        return longest
+
+
+# Create object of the class
+s1 = Solution()
+
+# Call the function and print the result
+print(s1.single(nums))
+
+
+
+🧠 Pattern Used Here
+✅ Hash Set + Start-of-Sequence Pattern
