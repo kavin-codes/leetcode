@@ -1,0 +1,44 @@
+# Input list of numbers
+nums = [2, 7, 11, 15]
+
+# Target value we want to achieve by adding two numbers
+target = 9
+
+
+# Define a class named solution
+class solution:
+
+    # Define a method 'single' that takes a list of numbers
+    def single(self, nums):
+
+        # Dictionary to store numbers we have seen so far
+        # Key   -> number from list
+        # Value -> index of that number
+        d = {}
+
+        # Loop through the list using index
+        for i in range(len(nums)):
+
+            # Calculate the number needed to reach the target
+            # Example: target = 9, nums[i] = 7 → need = 2
+            need = target - nums[i]
+
+            # Check if the required number already exists in dictionary
+            if need in d:
+                # If found, return the index of 'need'
+                # and the current index 'i'
+                return [d[need], i]
+
+            # If not found, store the current number with its index
+            d[nums[i]] = i
+
+
+# Create an object of the solution class
+s1 = solution()
+
+# Call the 'single' method and print the result
+print(s1.single(nums))
+
+
+pattern :
+dictionary (hash map) for fast lookup
