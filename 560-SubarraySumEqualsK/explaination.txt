@@ -1,0 +1,35 @@
+class Solution:
+    def subarraySum(self, nums, k):
+        count = 0                     # Total number of subarrays whose sum = k
+        current_sum = 0               # Running prefix sum of the array
+        prefix_map = {0: 1}           # HashMap to store frequency of prefix sums
+                                       # 0:1 is important to handle subarrays starting from index 0
+
+        for num in nums:
+            current_sum += num        # Add current number to running sum
+
+            # Check if there exists a previous prefix sum that makes a subarray sum = k
+            if (current_sum - k) in prefix_map:
+                count += prefix_map[current_sum - k]  # Add all occurrences of that prefix sum
+
+            # Update the frequency of current_sum in the map for future subarrays
+            prefix_map[current_sum] = prefix_map.get(current_sum, 0) + 1
+
+        return count                  # Return total number of subarrays found
+
+
+# ---------------- Example usage ----------------
+nums = [1, 2, 3]                   # Input array
+k = 3                               # Target sum
+
+sol = Solution()                    # Create instance of Solution class
+print(sol.subarraySum(nums, k))     # Call the method → Output: 2
+
+
+
+
+Pattern / Method Used
+
+This solution uses “Prefix Sum + HashMap” pattern
+
+prefix_sum[j] - prefix_sum[i] = k → sum of subarray nums[i+1..j] = k
