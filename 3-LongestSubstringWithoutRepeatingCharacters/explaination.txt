@@ -1,0 +1,66 @@
+s = "abcdabcd"
+
+class Solution:
+    def single(self, s):
+
+        # Set to store unique characters in the current window
+        char_set = set()
+
+        # Left pointer of the sliding window
+        left = 0
+
+        # Variable to store the maximum length found
+        max_len = 0
+
+        # Right pointer moves from index 0 to end of string
+        for right in range(len(s)):
+
+            # If current character already exists in the window,
+            # shrink the window from the left until it is removed
+            while s[right] in char_set:
+                char_set.remove(s[left])  # remove character at left
+                left += 1                 # move left pointer right
+
+            # Add the current character to the window
+            char_set.add(s[right])
+
+            # Calculate current window length and update max_len
+            max_len = max(max_len, right - left + 1)
+
+        # Return the length of the longest substring without repeats
+        return max_len
+
+
+# Create object of Solution class
+s1 = Solution()
+
+# Call the function and print the result
+print(s1.single(s))
+
+
+================================================================
+
+
+🧠 Pattern Used Here
+👉 Sliding Window Pattern
+Why Sliding Window?
+
+The problem asks for:
+
+Longest substring
+
+Without repeating characters
+
+Substring = continuous
+
+We need to expand and shrink a window efficiently
+
+How Sliding Window works here:
+
+right pointer → expands the window
+
+left pointer → shrinks the window when duplicates appear
+
+char_set → keeps track of characters inside the window
+
+Window always contains unique characters
