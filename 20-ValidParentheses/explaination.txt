@@ -1,0 +1,40 @@
+s = "({[]})"                  # Input string containing brackets
+
+class solution:
+    def isvaid(self, s):
+        
+        st = []               # Stack to store opening brackets
+        d = {                 # Dictionary mapping opening → closing brackets
+            "(": ")",
+            "{": "}",
+            "[": "]"
+        }
+
+        # Loop through each character in the string
+        for i in s:
+            # If the character is an opening bracket
+            if i in d:
+                st.append(i)  # Push opening bracket onto the stack
+            else:
+                # If a closing bracket appears but stack is empty
+                if st == []:
+                    return False  # No opening bracket to match
+                else:
+                    # Check if the closing bracket matches
+                    # the last opening bracket in the stack
+                    if d[st[-1]] == i:
+                        st.pop()  # Match found, remove opening bracket
+                    else:
+                        return False  # Mismatch found
+
+        # After processing all characters
+        if st == []:
+            return True       # Stack empty → all brackets matched correctly
+        else:
+            return False      # Stack not empty → some brackets not closed
+
+s1 = solution()               # Create an object of the class
+print(s1.isvaid(s))           # Call the function and print result
+
+
+🧠 Pattern Used: Stack Pattern (LIFO – Last In, First Out)
