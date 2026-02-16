@@ -1,0 +1,35 @@
+# List of characters to be reversed
+s = ["h", "e", "l", "l", "o"]
+
+# Define the Solution class (same structure used in LeetCode)
+class Solution:
+    def reverseString(self, s):
+        # left pointer starts at the beginning of the list
+        left = 0
+        
+        # right pointer starts at the end of the list
+        right = len(s) - 1
+
+        # Loop until both pointers meet
+        while left < right:
+            # Swap characters at left and right positions
+            s[left], s[right] = s[right], s[left]
+            
+            # Move left pointer one step to the right
+            left += 1
+            
+            # Move right pointer one step to the left
+            right -= 1
+
+# Create an object of Solution class
+s1 = Solution()
+
+# Call the function (it reverses the list in place)
+s1.reverseString(s)
+
+# Print the reversed list
+print(s)
+
+
+
+🔁 Two Pointers (Left–Right) Pattern
