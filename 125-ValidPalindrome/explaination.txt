@@ -1,0 +1,43 @@
+class Solution:
+    # Function to check whether the given string is a palindrome
+    def isPalindrome(self, s: str) -> bool:
+
+        # Initialize left pointer at the start of the string
+        left = 0
+
+        # Initialize right pointer at the end of the string
+        right = len(s) - 1
+
+        # Loop until the two pointers meet
+        while left < right:
+
+            # Move the left pointer forward
+            # if the current character is NOT alphanumeric
+            while left < right and not s[left].isalnum():
+                left += 1
+
+            # Move the right pointer backward
+            # if the current character is NOT alphanumeric
+            while left < right and not s[right].isalnum():
+                right -= 1
+
+            # Compare the characters at left and right pointers
+            # Convert both characters to lowercase to ignore case
+            if s[left].lower() != s[right].lower():
+                # If characters do not match, it is not a palindrome
+                return False
+
+            # Move left pointer one step to the right
+            left += 1
+
+            # Move right pointer one step to the left
+            right -= 1
+
+        # If all characters matched, return True
+        return True
+
+
+==========================================================================
+
+
+🧠 Pattern Used: Two Pointer Pattern
