@@ -14,7 +14,7 @@ class Solution:
 
             if current_sum == target:
                 # Found the pair that sums to target
-                return (nums[left], nums[right])
+                return (left + 1, right + 1)
             elif current_sum > target:
                 # Sum too big, move right pointer left to reduce sum
                 right -= 1

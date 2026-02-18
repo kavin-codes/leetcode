@@ -10,7 +10,7 @@ class Solution:
             current_sum = nums[left] + nums[right]
 
             if current_sum == target:
-                return (nums[left], nums[right])
+                return (left + 1, right + 1)
             elif current_sum > target:
                 right -= 1
             else:
