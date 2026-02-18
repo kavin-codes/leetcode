@@ -1,0 +1,34 @@
+# Two-pointer pattern to find a pair of numbers in a sorted array that sums to target
+nums = [2, 3, 4, 11]
+target = 9
+
+class Solution:
+    def single(self, nums, target):
+        # Initialize two pointers: left at start, right at end
+        left = 0
+        right = len(nums) - 1
+
+        # Loop until pointers meet
+        while left < right:
+            current_sum = nums[left] + nums[right]  # Sum of elements at pointers
+
+            if current_sum == target:
+                # Found the pair that sums to target
+                return (nums[left], nums[right])
+            elif current_sum > target:
+                # Sum too big, move right pointer left to reduce sum
+                right -= 1
+            else:
+                # Sum too small, move left pointer right to increase sum
+                left += 1
+
+        # If no pair found, return None
+        return None  
+
+# Example usage
+s1 = Solution()
+print(s1.single(nums, target))  # Output: (4, 5) if present, else None
+
+===================================================================================
+
+Pattern used: Two-Pointer Technique
