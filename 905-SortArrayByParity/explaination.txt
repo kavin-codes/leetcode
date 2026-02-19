@@ -1,0 +1,48 @@
+# Input list of numbers
+nums = [3, 1, 2, 4, 5, 6]
+
+class Solution:
+    def single(self, nums):
+        # Initialize two pointers:
+        # left starts from the beginning of the list
+        # right starts from the end of the list
+        left = 0
+        right = len(nums) - 1
+
+        # Continue looping until the two pointers meet
+        while left < right:
+
+            # If the number at left pointer is even,
+            # it is already in the correct position (towards the right),
+            # so move the left pointer forward
+            if nums[left] % 2 == 0:
+                left += 1
+
+            # If the number at right pointer is odd,
+            # it is already in the correct position (towards the left),
+            # so move the right pointer backward
+            elif nums[right] % 2 != 0:
+                right -= 1
+
+            # Otherwise:
+            # nums[left] is odd and nums[right] is even,
+            # which means they are on the wrong sides.
+            # Swap them to move odd left and even right.
+            else:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
+
+        # Return the modified list with odds on the left and evens on the right
+        return nums        
+
+# Create an object of the Solution class
+s1 = Solution()
+
+# Call the function and print the result
+print(s1.single(nums))
+
+
+===========================================================================
+
+🧠 Pattern Used: Two-Pointer Technique
