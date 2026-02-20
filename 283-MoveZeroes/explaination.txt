@@ -1,0 +1,34 @@
+# Input list
+nums = [0, 1, 0, 3, 12]
+
+class Solution:
+    def single(self, nums):
+        # slow pointer keeps track of the position
+        # where the next non-zero element should be placed
+        slow = 0
+
+        # fast pointer traverses the entire list
+        for fast in range(len(nums)):
+            # Check if the current element is non-zero
+            if nums[fast] != 0:
+                # Swap the non-zero element at fast
+                # with the element at slow
+                nums[slow], nums[fast] = nums[fast], nums[slow]
+
+                # Move slow pointer to the next position
+                slow += 1
+
+
+# Create an object of Solution
+s1 = Solution()
+
+# Call the method to rearrange the list
+s1.single(nums)
+
+# Print the modified list
+print(nums)
+
+=========================================================================================
+
+Code Pattern Used 🧠
+✅ Two Pointers Pattern (Fast & Slow Pointers)
