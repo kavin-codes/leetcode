@@ -1,0 +1,39 @@
+# Pattern Used: Two-Pointer Pattern (Slow–Fast Pointer)
+# ----------------------------------------------------
+# - One pointer (i) scans through the array (fast pointer)
+# - Another pointer (k) keeps track of where the next valid
+#   (non-val) element should be placed (slow pointer)
+# - This allows in-place modification without extra memory
+
+nums = [0, 1, 2, 2, 3, 0, 4, 2]
+val = 2
+
+class Solution:
+    def single(self, nums, val):
+        # k is the slow pointer
+        # It represents the index where the next non-val element will go
+        k = 0
+
+        # i is the fast pointer
+        # It iterates over every element in the list
+        for i in range(len(nums)):
+            
+            # If current element is NOT equal to val
+            if nums[i] != val:
+                
+                # Place the current element at index k
+                nums[k] = nums[i]
+                
+                # Move slow pointer forward
+                k += 1
+
+        # k represents the count of elements not equal to val
+        # The first k elements in nums are the valid ones
+        return k
+
+# Create object of Solution class
+s1 = Solution()
+
+# Call the method and print the result
+print(s1.single(nums, val))
+
