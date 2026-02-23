@@ -1,0 +1,54 @@
+# Input list representing heights of vertical lines
+height = [1,8,6,2,5,4,8,3,7]
+
+class Solution:
+    def single(self, nums):
+        # Two-pointer approach to find maximum water container
+        
+        # Initialize left pointer at the beginning
+        left = 0
+        
+        # Initialize right pointer at the end
+        right = len(height) - 1
+        
+        # Variable to store maximum area found
+        max_area = 0  
+
+        # Loop until the two pointers meet
+        while left < right:
+            
+            # The height of container is limited 
+            # by the shorter of the two lines
+            Height = min(height[left], height[right])
+            
+            # Width is the distance between pointers
+            width = right - left
+            
+            # Area = height × width
+            area = Height * width
+            
+            # Update maximum area if current area is bigger
+            max_area = max(max_area, area)
+
+            # Move the pointer that has smaller height
+            # Because moving the taller one will not increase area
+            if height[left] < height[right]:
+                left += 1   # Move left pointer to the right
+            else:
+                right -= 1  # Move right pointer to the left
+
+        # Return the maximum area found
+        return max_area
+        
+
+# Create object of Solution class
+s1 = Solution()
+
+# Call the function and print result
+print(s1.single(height))
+
+
+===========================================================
+
+Pattern Used
+✅ Two Pointer Pattern
