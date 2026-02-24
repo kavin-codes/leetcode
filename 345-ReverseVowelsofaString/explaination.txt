@@ -43,3 +43,10 @@ s1 = Solution()
 # Input:  "hello"
 # Output: "holle"
 print(s1.reverseVowels("hello"))
+
+
+
+===========================================================
+
+Pattern Used
+✅ Two Pointer Pattern
