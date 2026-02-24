@@ -1,0 +1,45 @@
+class Solution:
+    def reverseVowels(self, s):
+        # Create a set of vowels (both lowercase and uppercase)
+        # Using a set makes lookup very fast (O(1) time complexity)
+        vowels = set("aeiouAEIOU")
+        
+        # Convert the string into a list because
+        # strings are immutable in Python (cannot be changed directly)
+        s = list(s)
+        
+        # Initialize two pointers:
+        # left starts from the beginning
+        # right starts from the end
+        left, right = 0, len(s) - 1
+
+        # Continue until the two pointers meet
+        while left < right:
+            
+            # Move left pointer forward until it finds a vowel
+            while left < right and s[left] not in vowels:
+                left += 1
+            
+            # Move right pointer backward until it finds a vowel
+            while left < right and s[right] not in vowels:
+                right -= 1
+            
+            # Swap the vowels found at left and right positions
+            s[left], s[right] = s[right], s[left]
+            
+            # Move both pointers inward
+            left += 1
+            right -= 1
+
+        # Convert the list back into a string and return it
+        return "".join(s)
+
+
+# Create an object of Solution class
+s1 = Solution()
+
+# Call the reverseVowels method and print the result
+# Example:
+# Input:  "hello"
+# Output: "holle"
+print(s1.reverseVowels("hello"))
