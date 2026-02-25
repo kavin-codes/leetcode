@@ -1,0 +1,19 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i = 0  # pointer for string s
+        j = 0  # pointer for string t
+
+        # Loop until either pointer reaches the end of its string
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:  # If characters match
+                i += 1        # Move pointer i to next character in s
+            j += 1            # Always move pointer j to next character in t
+
+        return i == len(s)   # If i reached end of s → all characters matched → subsequence
+
+=====================================================================
+
+
+✅ Pattern Used:
+
+Two Pointer (Same Direction) Pattern
