@@ -1,0 +1,31 @@
+class Solution:
+    def isHappy(self, n):
+        seen = set()  
+        # Create an empty set to store numbers we have already seen.
+        # This helps us detect if we enter a cycle (loop).
+
+        while n != 1:  
+            # Keep running until the number becomes 1 (happy number condition)
+
+            if n in seen:  
+                # If current number already exists in set,
+                # it means we are repeating → cycle detected
+                return False  # Not a happy number
+
+            seen.add(n)  
+            # Add current number to the set before transforming it
+
+            # Convert number to string → iterate each digit
+            # Convert each digit back to int
+            # Square each digit
+            # Take sum of all squared digits
+            n = sum(int(d)**2 for d in str(n))
+
+        return True  
+        # If loop exits, n must be 1 → Happy number
+
+
+# Driver code
+n = 19  # Example input
+s1 = Solution()  # Create object of Solution class
+print(s1.isHappy(n))  # Call function and print result
