@@ -29,3 +29,11 @@ class Solution:
 n = 19  # Example input
 s1 = Solution()  # Create object of Solution class
 print(s1.isHappy(n))  # Call function and print result
+
+
+
+=========================================================================================
+
+
+
+Pattern Used: Cycle Detection (Hash Set) + Simulation
