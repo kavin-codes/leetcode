@@ -1,0 +1,40 @@
+
+
+# Pattern: Bit Manipulation (XOR Pattern)
+# Idea:
+# 1. XOR of a number with itself is 0  -> a ^ a = 0
+# 2. XOR of a number with 0 is the number itself -> a ^ 0 = a
+# 3. XOR is commutative and associative
+# So, duplicate numbers cancel each other.
+# Only the single number remains at the end.
+
+class Solution:
+    def singleNumber(self, nums):
+        result = 0  # Initialize result to 0
+        
+        # Iterate through each number in the list
+        for num in nums:
+            # XOR current number with result
+            # Duplicate numbers cancel out
+            result ^= num
+        
+        # Final result will be the number that appears once
+        return result
+
+
+# Input list
+nums = [2, 2, 1]
+
+# Create object of Solution class
+S1 = Solution()
+
+# Call the method and print result
+print(S1.singleNumber(nums))
+
+
+
+
+
+
+🟢 Pattern Used:
+👉 Bit Manipulation (XOR Pattern)
