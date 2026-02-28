@@ -1,0 +1,53 @@
+# LeetCode 205 - Isomorphic Strings
+# We check if two strings s and t are isomorphic.
+# Isomorphic means:
+# 1. Each character in s maps to exactly one character in t.
+# 2. No two different characters in s map to the same character in t.
+
+class Solution:
+    def isIsomorphic(self, s, t):
+        # Dictionary to store mapping from s -> t
+        map_s_t = {}
+        
+        # Dictionary to store mapping from t -> s
+        # This ensures no two characters in s map to same character in t
+        map_t_s = {}
+        
+        # Loop through both strings together
+        for c1, c2 in zip(s, t):
+            
+            # Check mapping from s to t
+            if c1 in map_s_t:
+                # If already mapped, check if mapping is correct
+                if map_s_t[c1] != c2:
+                    return False
+            else:
+                # Create new mapping
+                map_s_t[c1] = c2
+            
+            # Check mapping from t to s
+            if c2 in map_t_s:
+                # If already mapped, check if mapping is correct
+                if map_t_s[c2] != c1:
+                    return False
+            else:
+                # Create new reverse mapping
+                map_t_s[c2] = c1
+        
+        # If no conflicts found, strings are isomorphic
+        return True
+
+
+# Test the function
+s = "egg"
+t = "add"
+
+s1 = Solution()
+print(s1.isIsomorphic(s, t))  # Output: True
+
+
+
+=======================================================================================
+
+
+ 🔹 HashMap (Dictionary) Mapping Pattern
