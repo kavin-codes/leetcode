@@ -1,0 +1,50 @@
+# LeetCode 13 - Roman to Integer
+# Pattern Used: Hash Map + String Traversal (Greedy)
+
+class Solution:
+    def romanToInt(self, s):
+        # Step 1: Create a dictionary (hash map)
+        # This stores Roman symbols and their integer values
+        roman = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        
+        # Step 2: Initialize total result variable
+        total = 0
+        
+        # Step 3: Traverse the string character by character
+        for i in range(len(s)):
+            
+            # Step 4: Check subtraction condition
+            # If current value is smaller than next value,
+            # subtract it (example: IV -> 1 < 5)
+            if i + 1 < len(s) and roman[s[i]] < roman[s[i + 1]]:
+                total -= roman[s[i]]
+            
+            # Otherwise, add the value
+            else:
+                total += roman[s[i]]
+        
+        # Step 5: Return final result
+        return total
+
+
+# Example test
+s = "MCMXCIV"
+
+s1 = Solution()
+print(s1.romanToInt(s))  # Output: 1994
+
+
+
+
+=================================================================================================
+
+
+# Pattern Used: Hash Map + String Traversal (Greedy)
