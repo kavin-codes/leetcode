@@ -1,0 +1,47 @@
+# Define a class named Solution 
+class Solution:
+    
+    # This function calculates the maximum profit
+    # prices: list of stock prices where prices[i] is price on day i
+    def maxProfit(self, prices):
+        
+        # Start with minimum price as infinity
+        # So any price in the list will be smaller initially
+        min_price = float('inf')
+        
+        # Start with zero profit
+        max_profit = 0
+        
+        # Loop through each price in the list
+        for price in prices:
+            
+            # If current price is lower than minimum price seen so far
+            # Update the minimum price (best day to buy)
+            if price < min_price:
+                min_price = price
+            
+            else:
+                # Otherwise calculate profit if we sell today
+                profit = price - min_price
+                
+                # Update maximum profit if this profit is higher
+                max_profit = max(max_profit, profit)
+        
+        # Return the maximum profit found
+        return max_profit
+
+
+# Example input list
+prices = [7, 1, 5, 3, 6, 4]
+
+# Create object of Solution class
+s1 = Solution()
+
+# Call the function and print result
+print(s1.maxProfit(prices))   # Output: 5
+
+
+====================================================================
+
+ What is the Pattern?
+Sliding Window Pattern (Optimized Version)
