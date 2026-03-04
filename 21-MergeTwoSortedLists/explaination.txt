@@ -1,0 +1,49 @@
+# Definition for singly-linked list node.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val      # Value of the node
+        self.next = next    # Pointer to the next node
+
+
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        # Create a dummy node.
+        # This helps avoid handling special cases for the head.
+        dummy = ListNode()
+        
+        # 'current' pointer will build the new merged list.
+        current = dummy
+
+        # Traverse both lists while neither is empty
+        while list1 and list2:
+            
+            # Compare values of current nodes
+            if list1.val < list2.val:
+                # Attach the smaller node (list1) to merged list
+                current.next = list1
+                
+                # Move list1 pointer forward
+                list1 = list1.next
+            else:
+                # Attach the smaller node (list2) to merged list
+                current.next = list2
+                
+                # Move list2 pointer forward
+                list2 = list2.next
+
+            # Move the current pointer forward
+            current = current.next
+
+        # After the loop, one list may still have remaining nodes
+        # Attach the remaining part directly (already sorted)
+        current.next = list1 if list1 else list2
+
+        # Return merged list (skip dummy node)
+        return dummy.next
+
+
+    ====================================================================================================
+
+
+Pattern Used
+1. Two Pointer Pattern
