@@ -1,0 +1,37 @@
+class Solution:
+    def reverse(self, x):
+        # Initialize the variable to store the reversed number
+        rev = 0  
+
+        # Determine the sign of x: -1 if negative, 1 if positive
+        sign = -1 if x < 0 else 1  
+
+        # Work with the absolute value of x to simplify reversal
+        x = abs(x)  
+
+        # Loop until all digits are processed
+        while x != 0:
+            digit = x % 10          # Extract the last digit of x
+            rev = rev * 10 + digit  # Append it to rev by shifting existing digits left
+            x //= 10                # Remove the last digit from x
+
+        # Restore the original sign to the reversed number
+        rev *= sign  
+
+        # Check if the reversed number is within 32-bit signed integer range
+        if rev < -2**31 or rev > 2**31 - 1:
+            return 0  # Return 0 if overflow occurs
+
+        # Return the reversed integer
+        return rev
+
+# Example usage
+x = 123
+s1 = Solution()
+print(s1.reverse(x))  # Output: 321
+
+
+================================================
+
+
+# Pattern/Technique: Digit extraction & iterative reversal
