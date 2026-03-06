@@ -1,0 +1,43 @@
+
+
+class Solution:
+    def plusOne(self, digits):
+        # digits is a list representing a number
+        # Example: [1,2,3] represents 123
+        
+        # Get the length of the list
+        n = len(digits)
+
+        # Traverse the list from right to left (last digit to first digit)
+        # range(start, stop, step)
+        # start = n-1 (last index)
+        # stop = -1 (before index 0)
+        # step = -1 (move backwards)
+        for i in range(n - 1, -1, -1):
+
+            # Case 1: If the digit is less than 9
+            # We can simply add 1 and return the result
+            if digits[i] < 9:
+                digits[i] += 1   # Add 1 to the current digit
+                return digits    # Return immediately since no carry is needed
+
+            # Case 2: If the digit is 9
+            # 9 + 1 = 10, so digit becomes 0 and carry moves to the left
+            digits[i] = 0
+
+        # If the loop finishes, it means all digits were 9
+        # Example: [9,9,9] → [1,0,0,0]
+        # Add 1 at the beginning
+        return [1] + digits
+
+
+# Example usage
+digits = [9, 9, 9]
+obj = Solution()
+print(obj.plusOne(digits))   # Output: [1, 0, 0, 0]
+
+=============================================================================================================
+
+
+# LeetCode Problem #66: Plus One
+# Pattern Used: Reverse Traversal + Carry Handling (Simulation Pattern)
