@@ -1,0 +1,45 @@
+# Pattern Used: Modulus / Divisibility Checking Pattern
+# This pattern checks if a number is divisible by another number using the % operator.
+
+# Define a class named Solution
+class Solution:
+
+    # Define a method fizzBuzz that takes one parameter n
+    # n represents the number up to which we want to generate FizzBuzz values
+    def fizzBuzz(self, n):
+
+        # Create an empty list to store the results
+        result = []
+
+        # Loop through numbers from 1 to n
+        for i in range(1, n + 1):
+
+            # Check if the number is divisible by both 3 and 5
+            # % gives the remainder; if remainder is 0, the number is divisible
+            if i % 3 == 0 and i % 5 == 0:
+                result.append("FizzBuzz")  # Add "FizzBuzz" to the list
+
+            # Check if the number is divisible only by 3
+            elif i % 3 == 0:
+                result.append("Fizz")  # Add "Fizz" to the list
+
+            # Check if the number is divisible only by 5
+            elif i % 5 == 0:
+                result.append("Buzz")  # Add "Buzz" to the list
+
+            # If the number is not divisible by 3 or 5
+            else:
+                result.append(str(i))  # Convert the number to string and add it
+
+        # Return the final list containing all results
+        return result
+
+
+# Assign value 3 to n
+n = 3
+
+# Create an object of the Solution class
+S1 = Solution()
+
+# Call the fizzBuzz method using the object and print the result
+print(S1.fizzBuzz(n))
