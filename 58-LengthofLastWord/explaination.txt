@@ -1,0 +1,43 @@
+# Define a class Solution (LeetCode requires this structure)
+class Solution:
+
+    # Define the function that returns the length of the last word
+    def lengthOfLastWord(self, s):
+
+        # rstrip() removes spaces at the end of the string
+        # Example: "Hello World   " -> "Hello World"
+        s = s.rstrip()
+
+        # Variable to count the length of the last word
+        count = 0
+
+        # Loop from the last character of the string to the beginning
+        # len(s) - 1 → last index
+        # -1 → stop before index -1
+        # -1 → move backwards
+        for i in range(len(s) - 1, -1, -1):
+
+            # If a space is found, stop counting
+            if s[i] == " ":
+                break
+
+            # Otherwise increase the count
+            count += 1
+
+        # Return the final count (length of last word)
+        return count
+
+
+# Create a string input
+s = "Hello World"
+
+# Create an object of the Solution class
+obj = Solution()
+
+# Call the function and print the result
+print(obj.lengthOfLastWord(s))
+
+
+====================================================================================
+
+# Pattern Used: Reverse Traversal Pattern (Backward Iteration)
