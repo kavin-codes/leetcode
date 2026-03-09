@@ -1,0 +1,65 @@
+# Solution class required by LeetCode
+class Solution:
+
+    # Function to divide two integers without using *, /, %
+    def divide(self, dividend, divisor):
+
+        # Maximum value allowed for 32-bit signed integer
+        INT_MAX = 2**31 - 1
+
+        # Minimum value allowed for 32-bit signed integer
+        INT_MIN = -2**31
+
+        # Special overflow case:
+        # If dividend is the smallest integer and divisor is -1
+        # result becomes 2147483648 which is outside the 32-bit range
+        # so we return INT_MAX
+        if dividend == INT_MIN and divisor == -1:
+            return INT_MAX
+
+        # Determine if the final result should be negative
+        # XOR (^) returns True if signs are different
+        negative = (dividend < 0) ^ (divisor < 0)
+
+        # Convert numbers to positive to simplify calculations
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+
+        # This variable will store the final result
+        quotient = 0
+
+        # Continue while dividend is still greater than divisor
+        while dividend >= divisor:
+
+            # temp stores the current divisor value
+            temp = divisor
+
+            # multiple stores how many times divisor is used
+            multiple = 1
+
+            # Double temp using bit shift until it exceeds dividend
+            # temp << 1 means temp * 2
+            while dividend >= (temp << 1):
+                temp <<= 1
+                multiple <<= 1
+
+            # Subtract the largest doubled divisor from dividend
+            dividend -= temp
+
+            # Add the corresponding multiple to quotient
+            quotient += multiple
+
+        # If the result should be negative, change its sign
+        if negative:
+            quotient = -quotient
+
+        # Return the final quotient
+        return quotient
+
+
+# Create object of Solution class
+s = Solution()
+
+# Test cases
+print(s.divide(10, 3))   # Expected output: 3
+print(s.divide(7, -3))   # Expected output: -2
