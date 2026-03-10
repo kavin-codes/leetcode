@@ -1,0 +1,64 @@
+
+# Problem: Find the longest contiguous subarray with equal number of 0s and 1s.
+
+class Solution:
+    def findMaxLength(self, nums):
+        
+        # prefix_sum keeps track of the running sum
+        # we treat:
+        # 1 -> +1
+        # 0 -> -1
+        prefix_sum = 0
+        
+        # stores the maximum length of valid subarray found
+        max_len = 0
+        
+        # dictionary to store the first index where a prefix_sum appears
+        # {prefix_sum : index}
+        # initialize with {0: -1} to handle subarrays starting from index 0
+        seen = {0: -1}
+
+        # iterate through the array
+        for i in range(len(nums)):
+            
+            # convert 0 to -1 and keep 1 as +1
+            # this helps equal number of 0s and 1s result in sum = 0
+            if nums[i] == 0:
+                prefix_sum -= 1
+            else:
+                prefix_sum += 1
+
+            # if this prefix_sum has been seen before
+            # it means elements between the previous index and current index sum to 0
+            # which means equal number of 0s and 1s
+            if prefix_sum in seen:
+                
+                # calculate the length of this subarray
+                length = i - seen[prefix_sum]
+                
+                # update maximum length
+                max_len = max(max_len, length)
+
+            else:
+                # store the first occurrence of this prefix_sum
+                seen[prefix_sum] = i
+
+        # return the longest valid subarray length
+        return max_len
+
+
+# -------- Function Call --------
+nums = [0,1,1,1,1,1,0,0,0]
+
+sol = Solution()
+result = sol.findMaxLength(nums)
+
+print("Maximum Length:", result)
+
+
+
+==================================================================
+
+
+
+# Pattern: Prefix Sum + Hash Map
