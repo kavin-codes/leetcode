@@ -1,0 +1,55 @@
+class Solution:
+
+    # Function to add two binary strings
+    def addBinary(self, a, b):
+
+        # Start pointers from the end of both strings
+        i = len(a) - 1
+        j = len(b) - 1
+
+        # Carry for binary addition
+        carry = 0
+
+        # List to store the result
+        result = []
+
+        # Continue until both strings and carry are processed
+        while i >= 0 or j >= 0 or carry:
+
+            # Start with carry value
+            total = carry
+
+            # Add bit from string a
+            if i >= 0:
+                total += int(a[i])
+                i -= 1
+
+            # Add bit from string b
+            if j >= 0:
+                total += int(b[j])
+                j -= 1
+
+            # Store the current binary digit
+            result.append(str(total % 2))
+
+            # Update carry
+            carry = total // 2
+
+        # Reverse result and convert to string
+        return ''.join(result[::-1])
+
+
+# Input binary numbers
+a = "11"
+b = "1"
+
+# Create object of the class
+obj = Solution()
+
+# Call the function and print output
+print(obj.addBinary(a, b))
+
+
+===========================================
+
+Pattern: Two Pointers + Simulation
