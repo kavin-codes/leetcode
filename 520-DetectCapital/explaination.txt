@@ -1,0 +1,34 @@
+class Solution:
+    def detectCapitalUse(self, word):
+
+        # Condition 1: Check if all letters are uppercase
+        # Example: "USA"
+        if word.isupper():
+            return True
+
+        # Condition 2: Check if all letters are lowercase
+        # Example: "leetcode"
+        if word.islower():
+            return True
+
+        # Condition 3: Check if first letter is uppercase
+        # and remaining letters are lowercase
+        # Example: "Google"
+        if word[0].isupper() and word[1:].islower():
+            return True
+
+        # If none of the valid capitalization rules match
+        return False
+
+
+# Take input from user
+word = input("Enter word: ")
+
+# Create object of the Solution class
+obj = Solution()
+
+# Call the function
+result = obj.detectCapitalUse(word)
+
+# Print result
+print(result)
