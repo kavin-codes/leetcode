@@ -1,0 +1,33 @@
+class Solution:
+    def longestCommonPrefix(self, strs):
+        # Check if the list is empty
+        if not strs:
+            return ""
+
+        # Take the first word as the initial prefix
+        prefix = strs[0]
+
+        # Compare prefix with each word in the list
+        for word in strs[1:]:
+            # Reduce the prefix until it matches the start of the word
+            while word.find(prefix) != 0:
+                prefix = prefix[:-1]  # Remove last character
+                if prefix == "":
+                    return ""
+
+        return prefix
+
+
+# Create object of Solution class
+obj = Solution()
+
+# Call the function
+result = obj.longestCommonPrefix(["flower", "flow", "flight"])
+
+# Print the result
+print(result)
+
+
+=================================================
+
+Prefix Reduction Pattern (String Comparison)
