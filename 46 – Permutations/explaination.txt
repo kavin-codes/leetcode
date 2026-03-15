@@ -1,0 +1,33 @@
+class Solution:
+    def permute(self, nums):
+        result = []  # store all permutations
+
+        # backtracking function
+        def backtrack(path, remaining):
+            # if no numbers remain, we found a full permutation
+            if not remaining:
+                result.append(path)
+                return
+
+            # try each number in remaining list
+            for i in range(len(remaining)):
+                # add the number to the path and recurse
+                backtrack(
+                    path + [remaining[i]],           # current permutation path
+                    remaining[:i] + remaining[i+1:]  # remaining numbers
+                )
+
+        # start recursion
+        backtrack([], nums)
+
+        return result
+
+
+# function call
+s = Solution()
+
+# input
+nums = [1,2,3]
+
+# output
+print(s.permute(nums))
