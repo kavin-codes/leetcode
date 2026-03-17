@@ -1,0 +1,30 @@
+class Solution:
+    def isPalindrome(self, x):
+        # Negative numbers are not palindrome
+        # Numbers ending with 0 (except 0) are also not palindrome
+        if x < 0 or (x % 10 == 0 and x != 0):
+            return False
+        
+        reversed_half = 0
+        
+        # Reverse only half of the number
+        while x > reversed_half:
+            digit = x % 10                 # get last digit
+            reversed_half = reversed_half * 10 + digit  # build reversed number
+            x //= 10                      # remove last digit
+        
+        # Check for even and odd length numbers
+        return x == reversed_half or x == reversed_half // 10
+
+
+# 🔽 Function Call (Driver Code)
+obj = Solution()
+
+x = 121
+print(obj.isPalindrome(x))   # Output: True
+
+x = -121
+print(obj.isPalindrome(x))   # Output: False
+
+x = 10
+print(obj.isPalindrome(x))   # Output: False
