@@ -1,0 +1,26 @@
+class Solution:
+    def rotate(self, matrix):
+        # Get size of matrix (n x n)
+        n = len(matrix)
+        
+        # Step 1: Transpose the matrix
+        # Convert rows into columns
+        for i in range(n):
+            for j in range(i, n):
+                # Swap elements across diagonal
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        # Step 2: Reverse each row
+        # This gives the final 90° clockwise rotation
+        for row in matrix:
+            row.reverse()
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+obj = Solution()
+obj.rotate(matrix)
+
+print(matrix)
