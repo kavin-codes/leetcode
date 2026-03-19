@@ -1,0 +1,27 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def addTwoNumbers(l1, l2):
+    dummy = ListNode()   # Dummy node to store result
+    current = dummy      # Pointer to build result list
+    carry = 0            # Carry for sum
+
+    while l1 or l2 or carry:
+        val1 = l1.val if l1 else 0   # Get value from l1
+        val2 = l2.val if l2 else 0   # Get value from l2
+
+        total = val1 + val2 + carry  # Add values + carry
+        carry = total // 10          # Update carry
+        digit = total % 10           # Get current digit
+
+        current.next = ListNode(digit)  # Create new node
+        current = current.next          # Move pointer
+
+        if l1:
+            l1 = l1.next   # Move l1 pointer
+        if l2:
+            l2 = l2.next   # Move l2 pointer
+
+    return dummy.next  # Return result (skip dummy node)
