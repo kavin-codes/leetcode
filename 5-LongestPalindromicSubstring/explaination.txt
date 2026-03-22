@@ -1,0 +1,63 @@
+class Solution:
+    def longestPalindrome(self, s):
+        # If the string length is less than 2,
+        # it is already a palindrome (single char or empty)
+        if len(s) < 2:
+            return s
+        
+        # 'start' will store the starting index of longest palindrome
+        start = 0
+        
+        # 'max_length' keeps track of longest palindrome length found
+        max_length = 1
+
+        # Helper function to expand around the center
+        def expand(left, right):
+            # Keep expanding while:
+            # 1. left index is valid
+            # 2. right index is valid
+            # 3. characters at left and right are equal
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1   # move left pointer to left
+                right += 1  # move right pointer to right
+            
+            # After loop stops, indices are one step beyond palindrome
+            # So actual length = right - left - 1
+            return right - left - 1
+
+        # Loop through each character in string
+        for i in range(len(s)):
+            
+            # Case 1: Odd length palindrome (center is one character)
+            # Example: "aba"
+            len1 = expand(i, i)
+            
+            # Case 2: Even length palindrome (center is between two characters)
+            # Example: "abba"
+            len2 = expand(i, i + 1)
+            
+            # Take the maximum length from both cases
+            max_len = max(len1, len2)
+            
+            # If we found a longer palindrome than before
+            if max_len > max_length:
+                
+                # Calculate new starting index
+                # (max_len - 1) // 2 helps adjust center shift
+                start = i - (max_len - 1) // 2
+                
+                # Update maximum length
+                max_length = max_len
+        
+        # Return the longest palindrome substring
+        return s[start:start + max_length]
+
+
+# Create object of Solution class
+obj = Solution()
+
+# Call the function with input string
+result = obj.longestPalindrome("babad")
+
+# Print the result
+print(result)
