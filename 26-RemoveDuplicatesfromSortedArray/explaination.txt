@@ -1,0 +1,31 @@
+class Solution:
+    def removeDuplicates(self, nums):
+        # Edge case: if array is empty or has 1 element
+        if len(nums) == 0:
+            return 0
+        
+        # 'i' will track the position of the last unique element
+        i = 0
+        
+        # 'j' is the fast pointer that scans the array
+        for j in range(1, len(nums)):
+            
+            # If current element is different from the last unique element
+            if nums[j] != nums[i]:
+                
+                # Move pointer 'i' forward
+                i += 1
+                
+                # Place the new unique element at position 'i'
+                nums[i] = nums[j]
+        
+        # Number of unique elements is i + 1 (since index starts from 0)
+        return i + 1
+
+nums = [0,0,1,1,1,2,2,3,3,4]
+
+sol = Solution()
+k = sol.removeDuplicates(nums)
+
+print("k =", k)
+print("Updated nums =", nums[:k])
