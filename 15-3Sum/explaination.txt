@@ -1,0 +1,65 @@
+Use two-pointer (left & right)
+
+
+class Solution:
+    def threeSum(self, nums):
+        # Step 1: Sort the array (important for two-pointer technique)
+        nums.sort()
+
+        # This will store all unique triplets
+        result = []
+
+        # Step 2: Fix one element (nums[i])
+        for i in range(len(nums)):
+
+            # Skip duplicate elements to avoid repeating triplets
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            # Initialize two pointers
+            left = i + 1              # next element after i
+            right = len(nums) - 1    # last element
+
+            # Step 3: Use two-pointer approach
+            while left < right:
+
+                # Calculate sum of three numbers
+                total = nums[i] + nums[left] + nums[right]
+
+                # Case 1: If sum is 0 → valid triplet found
+                if total == 0:
+                    # Add the triplet to result
+                    result.append([nums[i], nums[left], nums[right]])
+
+                    # Skip duplicate values for 'left'
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+
+                    # Skip duplicate values for 'right'
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+
+                    # Move both pointers inward
+                    left += 1
+                    right -= 1
+
+                # Case 2: If sum is less than 0 → increase sum
+                elif total < 0:
+                    left += 1   # move left pointer right
+
+                # Case 3: If sum is greater than 0 → decrease sum
+                else:
+                    right -= 1  # move right pointer left
+
+        # Step 4: Return all unique triplets
+        return result
+
+
+# 🔹 Function Call (Driver Code)
+obj = Solution()
+
+# Input array
+nums = [-1, 0, 1, 2, -1, -4]
+
+# Print result
+print(obj.threeSum(nums))
