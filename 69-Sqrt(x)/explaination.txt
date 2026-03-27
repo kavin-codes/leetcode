@@ -1,0 +1,51 @@
+class Solution:
+    def mySqrt(self, x):
+        # Handle edge cases: sqrt(0) = 0, sqrt(1) = 1
+        if x < 2:
+            return x
+        
+        # Define search space from 1 to x//2
+        # (because sqrt(x) cannot be more than x//2 for x >= 2)
+        left, right = 1, x // 2
+        
+        # Variable to store the final answer (floor value)
+        ans = 0
+        
+        # Start binary search loop
+        while left <= right:
+            # Find middle value
+            mid = (left + right) // 2
+            
+            # Square of mid
+            square = mid * mid
+            
+            # Case 1: Perfect square found
+            if square == x:
+                return mid
+            
+            # Case 2: mid^2 is less than x → move right
+            elif square < x:
+                ans = mid          # store possible answer
+                left = mid + 1     # search in right half
+            
+            # Case 3: mid^2 is greater than x → move left
+            else:
+                right = mid - 1    # search in left half
+        
+        # Return the floor value of sqrt(x)
+        return ans
+
+
+# Create object of Solution class
+obj = Solution()
+
+# Function calls
+print(obj.mySqrt(4))   # Output: 2
+print(obj.mySqrt(8))   # Output: 2
+print(obj.mySqrt(15))  # Output: 3
+
+
+================================
+
+
+Pattern Used: Binary Search
