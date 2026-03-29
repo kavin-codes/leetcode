@@ -1,0 +1,60 @@
+class Solution:
+    def merge(self, nums1, m, nums2, n):
+        # i points to the last valid element in nums1
+        i = m - 1
+        
+        # j points to the last element in nums2
+        j = n - 1
+        
+        # k points to the last position of nums1 (including extra space)
+        k = m + n - 1
+
+        # Loop until one of the arrays is exhausted
+        while i >= 0 and j >= 0:
+            
+            # Compare the last elements of both arrays
+            if nums1[i] > nums2[j]:
+                # Place the larger element at position k
+                nums1[k] = nums1[i]
+                
+                # Move pointer i to the left
+                i -= 1
+            else:
+                # Place nums2 element if it is larger or equal
+                nums1[k] = nums2[j]
+                
+                # Move pointer j to the left
+                j -= 1
+            
+            # Move pointer k to the left after placing element
+            k -= 1
+
+        # If nums2 still has elements left, copy them
+        # (No need to copy nums1 elements because they are already in place)
+        while j >= 0:
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1
+
+
+# Example usage
+nums1 = [1, 2, 3, 0, 0, 0]  # nums1 has extra space to hold nums2
+m = 3                       # number of valid elements in nums1
+
+nums2 = [2, 5, 6]
+n = 3                       # number of elements in nums2
+
+# Create object of Solution class
+obj = Solution()
+
+# Call merge function
+obj.merge(nums1, m, nums2, n)
+
+# Final merged result is stored in nums1
+print(nums1)  # Output: [1, 2, 2, 3, 5, 6]
+
+================================
+
+Pattern
+
+Two Pointer + Reverse Traversal (In-place Merge)
