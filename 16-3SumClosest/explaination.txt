@@ -1,0 +1,39 @@
+def threeSumClosest(nums, target):
+    # Step 1: Sort the array
+    nums.sort()
+    
+    # Step 2: Initialize closest sum with a very large value
+    closest_sum = float('inf')
+    
+    # Step 3: Loop through the array
+    for i in range(len(nums) - 2):
+        
+        # Two pointers
+        left = i + 1
+        right = len(nums) - 1
+        
+        # Step 4: Use two-pointer approach
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+            
+            # Step 5: Update closest sum if needed
+            if abs(current_sum - target) < abs(closest_sum - target):
+                closest_sum = current_sum
+            
+            # Step 6: Move pointers
+            if current_sum < target:
+                left += 1  # Need bigger sum
+            elif current_sum > target:
+                right -= 1  # Need smaller sum
+            else:
+                return current_sum  # Exact match
+    
+    return closest_sum
+
+
+
+
+    =============================================================
+
+
+Pattern Used: Two Pointers (after sorting)
