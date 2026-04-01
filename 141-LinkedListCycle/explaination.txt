@@ -1,0 +1,24 @@
+class Solution:
+    def hasCycle(self, head):
+        # Initialize two pointers: slow and fast
+        slow = head
+        fast = head
+        
+        # Traverse the list
+        while fast and fast.next:
+            slow = slow.next          # move slow by 1 step
+            fast = fast.next.next    # move fast by 2 steps
+            
+            # If both pointers meet, cycle exists
+            if slow == fast:
+                return True
+        
+        # If we reach here, no cycle
+        return False
+
+
+
+==================================================
+
+
+Floyd’s Cycle Detection / Tortoise & Hare
