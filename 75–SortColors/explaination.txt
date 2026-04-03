@@ -1,0 +1,45 @@
+def sortColors(nums):
+    # Initialize three pointers
+    low = 0                 # Position to place next 0
+    mid = 0                 # Current element index
+    high = len(nums) - 1    # Position to place next 2
+
+    # Traverse the array until mid crosses high
+    while mid <= high:
+
+        # Case 1: If current element is 0
+        if nums[mid] == 0:
+            # Swap current element with low pointer
+            nums[low], nums[mid] = nums[mid], nums[low]
+            
+            # Move both pointers forward
+            low += 1
+            mid += 1
+
+        # Case 2: If current element is 1
+        elif nums[mid] == 1:
+            # 1 is already in correct position, just move mid
+            mid += 1
+
+        # Case 3: If current element is 2
+        else:  # nums[mid] == 2
+            # Swap current element with high pointer
+            nums[mid], nums[high] = nums[high], nums[mid]
+            
+            # Reduce high pointer only
+            high -= 1
+            # Note: DO NOT increment mid here
+            # Because swapped element needs to be checked again
+
+    # Return sorted array
+    return nums
+
+
+# 🔹 Function Call
+arr = [2, 0, 2, 1, 1, 0]
+
+# Call the function
+result = sortColors(arr)
+
+# Print the result
+print("Sorted Colors:", result)
