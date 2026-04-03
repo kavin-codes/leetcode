@@ -1,0 +1,65 @@
+# Definition for singly-linked list
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def swapPairs(head):
+    # Create a dummy node to handle edge cases (like head swap)
+    dummy = ListNode(0)
+    dummy.next = head
+
+    # 'prev' will point to node before the pair
+    prev = dummy
+
+    # Traverse while at least two nodes are available
+    while prev.next and prev.next.next:
+        
+        # Identify the two nodes to swap
+        first = prev.next
+        second = prev.next.next
+
+        # Swapping process
+        first.next = second.next   # Step 1: first points to next of second
+        second.next = first        # Step 2: second points to first
+        prev.next = second         # Step 3: prev connects to second
+
+        # Move prev pointer to next pair
+        prev = first
+
+    # Return new head
+    return dummy.next
+
+
+# 🔹 Function Call (Helper to create list)
+def create_list(arr):
+    head = ListNode(arr[0])
+    current = head
+    for val in arr[1:]:
+        current.next = ListNode(val)
+        current = current.next
+    return head
+
+
+# 🔹 Helper to print list
+def print_list(head):
+    while head:
+        print(head.val, end=" -> ")
+        head = head.next
+    print("None")
+
+
+# Test
+arr = [1, 2, 3, 4]
+head = create_list(arr)
+
+new_head = swapPairs(head)
+print_list(new_head)
+
+
+========================================
+
+
+ Pattern Used
+ Linked List Pointer Manipulation (Iterative)
