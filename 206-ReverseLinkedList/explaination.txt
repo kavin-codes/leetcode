@@ -1,0 +1,40 @@
+from typing import Optional
+
+# Definition for singly-linked list
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val          # store value
+        self.next = next        # pointer to next node
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None             # previous node
+        curr = head             # current node
+        
+        while curr:
+            next_node = curr.next   # store next node
+            curr.next = prev        # reverse link
+            
+            prev = curr             # move prev forward
+            curr = next_node        # move curr forward
+        
+        return prev                 # new head
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+# Create linked list: 1 -> 2 -> 3 -> None
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+
+# Call function
+sol = Solution()
+new_head = sol.reverseList(head)
+
+# Print reversed list
+curr = new_head
+while curr:
+    print(curr.val, end=" -> ")
+    curr = curr.next
+print("None")
