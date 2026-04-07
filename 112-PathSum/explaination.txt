@@ -1,0 +1,31 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def hasPathSum(self, root, targetSum):
+        # PATTERN: DFS (Depth First Search) using Recursion
+        
+        # Base Case: if tree is empty → no path
+        if not root:
+            return False
+        
+        # If it's a LEAF node (no left & right children)
+        # Check if remaining sum equals node value
+        if not root.left and not root.right:
+            return targetSum == root.val
+        
+        # Reduce the target sum by current node value
+        remaining_sum = targetSum - root.val
+        
+        # Recursively check left subtree
+        left_check = self.hasPathSum(root.left, remaining_sum)
+        
+        # Recursively check right subtree
+        right_check = self.hasPathSum(root.right, remaining_sum)
+        
+        # If any one path returns True → answer is True
+        return left_check or right_check
