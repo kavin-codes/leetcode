@@ -1,0 +1,42 @@
+class Solution:
+    def pascel(self, numRows):
+        triangle = []
+        # This list will store all rows of Pascal's Triangle
+
+        for i in range(numRows):
+            # Loop runs numRows times (each iteration creates one row)
+
+            row = [1]
+            # Every row starts with 1
+
+            if i > 0:
+                # Skip for the first row since it has no previous row
+
+                prev = triangle[i - 1]
+                # Get the previous row
+
+                for j in range(len(prev) - 1):
+                    # Loop through adjacent elements of previous row
+
+                    row.append(prev[j] + prev[j + 1])
+                    # Add the sum of two numbers above and append to current row
+
+                row.append(1)
+                # Every row ends with 1
+
+            triangle.append(row)
+            # Add the completed row to the triangle
+
+        return triangle
+        # Return the full Pascal's Triangle
+
+
+# Driver code
+numRows = 5
+# Number of rows to generate
+
+s1 = Solution()
+# Create object of the class
+
+print(s1.pascel(numRows))
+# Call function and print result
