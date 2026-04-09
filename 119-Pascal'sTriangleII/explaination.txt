@@ -1,0 +1,54 @@
+# Define a class
+class Solution:
+    
+    # Function to generate Pascal's row
+    def pascel(self, rownums):
+
+        # Step 1: Start with the first row (Row 0)
+        # Mathematically: Row0 = [1]
+        row = [1]
+
+        # Step 2: Loop from 1 to rownums (inclusive)
+        # This builds rows one by one
+        for i in range(1, rownums + 1):
+
+            # Step 3: Every new row starts with 1
+            # Mathematically: Row[i][0] = 1
+            new_row = [1]
+
+            # Step 4: Generate middle elements
+            # j runs from 1 to i-1
+            for j in range(1, i):
+
+                # Core logic:
+                # Each element = sum of two elements from previous row
+                # Formula: Row[i][j] = Row[i-1][j-1] + Row[i-1][j]
+                value = row[j - 1] + row[j]
+
+                # Add computed value to new row
+                new_row.append(value)
+
+            # Step 5: Last element is always 1
+            # Mathematically: Row[i][i] = 1
+            new_row.append(1)
+
+            # Step 6: Update row to newly created row
+            # Now this becomes previous row for next iteration
+            row = new_row
+
+        # Step 7: Return the final row
+        return row
+
+
+# ----------------------------
+# 🔹 Function Call
+# ----------------------------
+
+# Input value
+rownums = 3  
+
+# Create object of class
+s1 = Solution()
+
+# Call function and print result
+print(s1.pascel(rownums))
