@@ -1,0 +1,14 @@
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        # Check if n is positive
+        # Powers of two are always greater than 0 (1, 2, 4, 8, ...)
+        return n > 0 and (n & (n - 1)) == 0
+        # (n & (n - 1)) removes the lowest set bit in n
+        # If n is a power of two, it has only one '1' in binary
+        # Example: 8  -> 1000
+        #          7  -> 0111
+        # 1000 & 0111 = 0000 → result is 0 → True
+        # For non-powers of two:
+        # Example: 6  -> 0110
+        #          5  -> 0101
+        # 0110 & 0101 = 0100 ≠ 0 → False
